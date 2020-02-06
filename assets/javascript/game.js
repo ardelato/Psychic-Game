@@ -40,6 +40,7 @@ function wrongGuess(guess) {
 		gLeft = 9;
 		popUpMessage.innerHTML = 'Sorry! You ran out of Guesses...';
 		popUpWindow.style.visibility = 'visible';
+		popUpWindow.style.backgroundColor = 'rgba(255,0,0,0.7)';
 		setTimeout(resetGame, 2000);
 	} else {
 		updateStats(guess);
@@ -49,6 +50,7 @@ function wrongGuess(guess) {
 function correctGuess() {
 	popUpMessage.innerHTML = 'Congrats! You guessed correctly!';
 	popUpWindow.style.visibility = 'visible';
+	popUpWindow.style.backgroundColor = 'rgba(0,255,0,0.7)';
 	numWins++;
 	gLeft = 9;
 	setTimeout(resetGame, 2000);

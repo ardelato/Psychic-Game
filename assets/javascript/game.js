@@ -12,6 +12,9 @@ var currentGuesses;
 
 var correctLetter;
 
+var popUpMessage;
+var popUpWindow;
+
 function resetGame() {
 	wins.innerHTML = 'Wins: ' + numWins.toString();
 	loses.innerHTML = 'Loses: ' + numLoses.toString();
@@ -19,6 +22,7 @@ function resetGame() {
 	currentGuesses.innerHTML = 'Your Guesses so far: ';
 	guessArray = [];
 	correctLetter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+	popUpWindow.style.visibility = 'hidden';
 	console.log('Current Letter: ' + correctLetter);
 }
 
@@ -34,22 +38,29 @@ function wrongGuess(guess) {
 	if (--gLeft == 0) {
 		numLoses++;
 		gLeft = 9;
-		resetGame();
+		popUpMessage.innerHTML = 'Sorry! You ran out of Guesses...';
+		popUpWindow.style.visibility = 'visible';
+		setTimeout(resetGame, 2000);
 	} else {
 		updateStats(guess);
 	}
 }
 
 function correctGuess() {
+	popUpMessage.innerHTML = 'Congrats! You guessed correctly!';
+	popUpWindow.style.visibility = 'visible';
 	numWins++;
 	gLeft = 9;
-	resetGame();
+	setTimeout(resetGame, 2000);
 }
+
 window.onload = function() {
 	wins = document.getElementById('wins');
 	loses = document.getElementById('loses');
 	numGuesses = document.getElementById('numGuesses');
 	currentGuesses = document.getElementById('currentGuesses');
+	popUpWindow = document.getElementById('bg-modal');
+	popUpMessage = document.getElementById('resultsText');
 	resetGame();
 };
 
